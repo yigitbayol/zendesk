@@ -3,9 +3,6 @@
 namespace Appricot\Zendesk;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\App;
-
-use Zendesk;
 
 class ZendeskServiceProvider extends ServiceProvider
 {
@@ -16,9 +13,7 @@ class ZendeskServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('zendesk',function(){
-          return new Zendesk();
-        });
+        $this->app->make('Appricot\Zendesk\Zendesk');
     }
 
     /**

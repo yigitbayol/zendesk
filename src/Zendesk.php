@@ -37,8 +37,8 @@ class Zendesk extends Controller
       $bearer = base64_encode($username.':'.$token);
 
       $userdata['user'] = array(
-        'name' => $array->name,
-        'email' => $array->email,
+        'name' => $array['name'],
+        'email' => $array['email'],
         'verified' => 'true'
       );
 
@@ -78,14 +78,14 @@ class Zendesk extends Controller
       $bearer = base64_encode($username.':'.$token);
 
       $ticketdata['ticket'] = array(
-        'subject' => $array->subject,
+        'subject' => $array['subject'],
         'comment' => array(
-          'body' => $array->content
+          'body' => $array['content']
         ),
         'tags' => array(
-          $array->property_name,
-          $array->staff_name,
-          $array->job_id
+          $array['property_name'],
+          $array['staff_name'],
+          $array['job_id']
         )
       );
 
