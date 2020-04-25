@@ -7,7 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Curl;
 
-class ZendeskController extends Controller
+class Zendesk extends Controller
 {
 
     public function getAllUsers()
