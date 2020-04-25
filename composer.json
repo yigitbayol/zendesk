@@ -1,0 +1,26 @@
+{
+    "name": "appricot/zendesk",
+    "description": "Zendesk Laravel Wrapper",
+    "type": "library",
+    "require": {
+        "ixudra/curl": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "Yiğit Bayol",
+        "email": "yigit.bayol@bay-i.com"
+    }],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Appricot\\Zendesk\\ZendeskServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Appricot\\Zendesk\\": "packages/appricot/zendesk/src"
+        }
+    },
+    "minimum-stability": "dev"
+}
