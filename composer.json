@@ -3,7 +3,7 @@
     "description": "Zendesk Laravel Wrapper",
     "type": "library",
     "require": {
-        "ixudra/curl": "dev-master"
+        "ixudra/curl": "6.*"
     },
     "license": "MIT",
     "authors": [{
@@ -22,5 +22,17 @@
             "Appricot\\Zendesk\\": "packages/appricot/zendesk/src"
         }
     },
-    "minimum-stability": "dev"
+    "autoload": {
+        "psr-4": {
+            "Appricot\\Zendesk\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Appricot\\Zendesk\\ZendeskServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "master"
 }
