@@ -10,29 +10,10 @@
         "name": "Yiğit Bayol",
         "email": "yigit.bayol@bay-i.com"
     }],
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Appricot\\Zendesk\\ZendeskServiceProvider"
-            ]
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Appricot\\Zendesk\\": "packages/appricot/zendesk/src"
-        }
-    },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Appricot\\Zendesk\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Appricot\\Zendesk\\ZendeskServiceProvider"
-            ]
-        }
-    },
-    "minimum-stability": "dev"
 }
