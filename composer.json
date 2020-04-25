@@ -22,5 +22,5 @@
                 "Appricot\\Zendesk\\ZendeskServiceProvider"
             ]
         }
-    },
+    }
 }
