@@ -12,9 +12,9 @@ class Zendesk extends Controller
 
     public function getAllUsers()
     {
-        $url = 'https://'.env('ZENDESK_DOMAIN').'.zendesk.com/api/v2/users.json';
-        $username = env('ZENDESK_USER').'/token';
-        $token = env('ZENDESK_TOKEN');
+        $url = 'https://'.\Config::get('zendesk-laravel.domain').'.zendesk.com/api/v2/users.json';
+        $username = \Config::get('zendesk-laravel.user').'/token';
+        $token = \Config::get('zendesk-laravel.token');
         $bearer = base64_encode($username.':'.$token);
 
         $c = Curl::to($url)
@@ -31,9 +31,9 @@ class Zendesk extends Controller
 
     public function createUser($array)
     {
-      $url = 'https://'.env('ZENDESK_DOMAIN').'.zendesk.com/api/v2/users/create_or_update.json';
-      $username = env('ZENDESK_USER').'/token';
-      $token = env('ZENDESK_TOKEN');
+      $url = 'https://'.\Config::get('zendesk-laravel.domain').'.zendesk.com/api/v2/users/create_or_update.json';
+      $username = \Config::get('zendesk-laravel.user').'/token';
+      $token = \Config::get('zendesk-laravel.token');
       $bearer = base64_encode($username.':'.$token);
 
       $userdata['user'] = array(
@@ -42,12 +42,12 @@ class Zendesk extends Controller
         'verified' => 'true'
       );
 
+
       $c = Curl::to($url)
       ->withHeader('Authorization: Basic '.$bearer)
       ->withData( $userdata )
       ->asJson()
       ->post();
-
 
       if ($c) {
         if (isset($c->error)) {
@@ -72,9 +72,9 @@ class Zendesk extends Controller
 
     public function createTicket($array)
     {
-      $url = 'https://'.env('ZENDESK_DOMAIN').'.zendesk.com/api/v2/tickets.json';
-      $username = $array->staff_email.'/token';
-      $token = env('ZENDESK_TOKEN');
+      $url = 'https://'.\Config::get('zendesk-laravel.domain').'.zendesk.com/api/v2/tickets.json';
+      $username = \Config::get('zendesk-laravel.user').'/token';
+      $token = \Config::get('zendesk-laravel.token');
       $bearer = base64_encode($username.':'.$token);
 
       $ticketdata['ticket'] = array(
@@ -82,6 +82,12 @@ class Zendesk extends Controller
         'comment' => array(
           'body' => $array['content']
         ),
+      	'requester' => array(
+      	  "locale_id" => $array['staff_guid'],
+      	  "name" => $array['staff_name'],
+      	  "email" => $array['staff_email']
+      	),
+	      'type'=> 'problem',
         'tags' => array(
           $array['property_name'],
           $array['staff_name'],
@@ -105,8 +111,8 @@ class Zendesk extends Controller
         } else {
           $r['type'] = 'success';
           $r['code'] = '1003';
-          $r['message'] = 'User added successfully to zendesk';
-          $r['user_id'] = $c->user->id;
+          $r['message'] = 'Ticket added successfully to zendesk';
+          $r['user_id'] = $c->ticket->requester_id;
           return json_encode($r);
         }
       } else {
